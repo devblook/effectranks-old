@@ -1,0 +1,21 @@
+commands:
+  power:
+    status-on: "%p &fPower enabled!"
+    status-off: "%p &fPower disabled!"
+
+    potion-list: "&8- &fList of potions"
+    space: "&8>"
+
+  effectranks:
+    help:
+      - "%p &fPlugin help 1/1"
+      - "&f/power [on/off] &8: &fTo enable/disable the power."
+      - "&f/effectranks &8: &fThe plugin manager."
+      - "&f/rankup &8: &fTo rankup."
+
+    load: "%p &fReloading plugin..."
+    load-file: "%p &fReloading file.."
+    reload: "%p &fPlugin reloaded!"
+    reload-file: "%p &f%file% &freloaded!"
+
+

@@ -1,0 +1,7 @@
+name: EffectRanks
+version: 1.0
+authors: [BryanGaming]
+main: bryangaming.code.EffectRanks
+api-version: 1.16
+
+commands:

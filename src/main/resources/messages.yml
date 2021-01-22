@@ -1,0 +1,20 @@
+#
+# Error messages:
+#
+
+
+error:
+  console: "You can't use that command in console."
+  no-args: "%p &fNo args found."
+  unknown-args: "%p &fUnknown args."
+  vault-noloaded: "%e &fOption unactivated, Vault no loaded."
+
+  rankup:
+    disabled: "%e &fThe rankup option is disabled."
+    unknown-rank: "%e &fUnknown rank: &a%rank%&f."
+
+  power:
+    effect-unknown: "%e &fUnknown effect. &a%effect%&f."
+
+  cooldown:
+    wait-time: "%e &fYou have to wait %time%&f."

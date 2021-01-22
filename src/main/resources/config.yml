@@ -1,0 +1,45 @@
+#
+# EffectRanks by BryanGaming
+# Version: 1.0
+#
+
+config:
+
+  prefix: "&a[ERanks] &8|"
+  p-variable: "%p"
+
+  error: "&c[Error] &8|"
+  e-variable: "%e"
+
+  # Status: power [For permission], group [For groups];
+  status: group
+  perms:
+    reload: effectranks.reload
+
+
+
+groups:
+  default:
+    cooldown: 2m
+    conditions:
+      - "SPEED,50,4"
+  A:
+    cooldown: 2m
+    conditions:
+      - "SPEED,540,4"
+
+time:
+  years: years
+  year: year
+  months: months
+  month: month
+  weeks: weeks
+  week: week
+  days: days
+  day: day
+  hours: hours
+  hour: hour
+  minutes: minutes
+  minute: minute
+  seconds: seconds
+  second: second
