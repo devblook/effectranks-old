@@ -32,7 +32,7 @@ public class PowerMethod{
 
         for (String conditions : rankMethod.getRankConditions(player)) {
 
-            String patheffect = conditions.split(",")[0].trim();
+            String patheffect = conditions.split(",")[0].trim().toUpperCase();
             String pathduration = conditions.split(",")[1].trim();
             String pathamplifier = conditions.split(",")[2].trim();
 

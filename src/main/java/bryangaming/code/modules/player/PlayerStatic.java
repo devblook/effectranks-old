@@ -1,7 +1,6 @@
 package bryangaming.code.modules.player;
 
 
-import bryangaming.code.utils.VariableManager;
 import org.bukkit.ChatColor;
 
 public class PlayerStatic {

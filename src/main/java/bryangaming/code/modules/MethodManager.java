@@ -1,6 +1,7 @@
 package bryangaming.code.modules;
 
 import bryangaming.code.Manager;
+import bryangaming.code.modules.convert.ConvertPotion;
 import bryangaming.code.modules.player.PlayerMessage;
 
 public class MethodManager
@@ -9,6 +10,7 @@ public class MethodManager
     private PowerMethod powerMethod;
     private RankMethod loopMethod;
     private CooldownMethod cooldownMethod;
+    private ConvertPotion convertPotion;
 
     private Manager manager;
 
@@ -22,10 +24,11 @@ public class MethodManager
         loopMethod = new RankMethod(manager);
         powerMethod = new PowerMethod(manager);
         cooldownMethod = new CooldownMethod(manager);
+        convertPotion = new ConvertPotion(manager);
     }
 
     public RankMethod getLoopMethod() {
-        return this.loopMethod;
+        return loopMethod;
     }
 
     public PlayerMessage getSender() {
@@ -38,5 +41,9 @@ public class MethodManager
 
     public CooldownMethod getCooldownMethod(){
         return cooldownMethod;
+    }
+
+    public ConvertPotion getConvertPotion() {
+        return convertPotion;
     }
 }

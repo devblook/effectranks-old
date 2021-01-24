@@ -3,10 +3,13 @@ package bryangaming.code.commands;
 import bryangaming.code.Manager;
 import bryangaming.code.EffectRanks;
 
+import bryangaming.code.modules.CooldownMethod;
 import bryangaming.code.modules.PowerMethod;
 import bryangaming.code.modules.RankMethod;
+import bryangaming.code.modules.convert.ConvertPotion;
 import bryangaming.code.modules.player.PlayerMessage;
 import bryangaming.code.utils.Configuration;
+import bryangaming.code.utils.StringFormat;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
 
@@ -18,7 +21,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-@Command(names = "power")
+@Command(names = "effects")
 public class PowerCommand implements CommandClass {
 
     private final EffectRanks plugin;
@@ -27,6 +30,7 @@ public class PowerCommand implements CommandClass {
     private final PlayerMessage playersender;
     private final PowerMethod powerMethod;
 
+    private final Configuration config;
     private final Configuration commands;
     private final Configuration messages;
 
@@ -37,14 +41,17 @@ public class PowerCommand implements CommandClass {
         this.playersender = manager.getPlayerMethods().getSender();
         this.powerMethod = manager.getPlayerMethods().getPowerMethod();
 
+        this.config = manager.getFiles().getConfig();
         this.commands = manager.getFiles().getCommands();
         this.messages = manager.getFiles().getMessages();
     }
 
     @Command(names = "")
     public boolean onCommand(@Sender Player player) {
-        playersender.sendMessage(player, messages.getString("error.no-args"));
-        playersender.sendMessage(player, "&8- &fUsage: &a/power [on/off/list]");
+        StringFormat stringFormat = manager.getVariables();
+
+        playersender.sendMessage(player, messages.getString("error.unknown-args")
+            .replace("%usage%", stringFormat.getUsage("effects", "on, off, transfer, list")));
         return true;
     }
 
@@ -52,17 +59,42 @@ public class PowerCommand implements CommandClass {
     public boolean onOnSubCommand(@Sender Player player) {
 
         RankMethod rankMethod = manager.getPlayerMethods().getLoopMethod();
-        UUID playeruuid = player.getUniqueId();
+        CooldownMethod cooldownMethod = manager.getPlayerMethods().getCooldownMethod();
 
-        if (rankMethod.playerIsInCooldown(player)){
+        if (cooldownMethod.playerIsInCooldown(player)) {
             playersender.sendMessage(player, messages.getString("error.cooldown.wait-time")
-                        .replace("%time%", rankMethod.getTextRankCooldown(player)));
+                    .replace("%time%", cooldownMethod.getTextRankCooldown(player)));
             return true;
         }
 
-        powerMethod.setPower(playeruuid);
-        rankMethod.putCooldown(player, (System.currentTimeMillis() / 1000) + rankMethod.getRankCooldown(player));
-        playersender.sendMessage(player, commands.getString("commands.power.status-on"));
+        if (rankMethod.getPlayerRank(player).equalsIgnoreCase("default") && config.getConfigurationSection("default") == null) {
+            playersender.sendMessage(player, messages.getString("error.effects.empty-effects"));
+            return true;
+        }
+        return true;
+    }
+
+    @Command(names = "convert")
+    public boolean onConvertSubCommand(@Sender Player player) {
+
+        RankMethod rankMethod = manager.getPlayerMethods().getLoopMethod();
+        CooldownMethod cooldownMethod = manager.getPlayerMethods().getCooldownMethod();
+        ConvertPotion convertPotion = manager.getPlayerMethods().getConvertPotion();
+
+        if (cooldownMethod.playerIsInCooldown(player)){
+            playersender.sendMessage(player, messages.getString("error.cooldown.wait-time")
+                        .replace("%time%", cooldownMethod.getTextRankCooldown(player)));
+            return true;
+        }
+
+        if (rankMethod.getPlayerRank(player).equalsIgnoreCase("default") && config.getConfigurationSection("default") == null){
+            playersender.sendMessage(player, messages.getString("error.effects.empty-effects"));
+            return true;
+        }
+
+        player.getInventory().addItem(convertPotion.convertPotion(rankMethod.getPlayerRank(player)));
+        cooldownMethod.putCooldown(player, (System.currentTimeMillis() / 1000) + cooldownMethod.getRankCooldown(player));
+        playersender.sendMessage(player, commands.getString("commands.effects.converted"));
         return true;
     }
 
@@ -72,15 +104,12 @@ public class PowerCommand implements CommandClass {
         UUID playeruuid = player.getUniqueId();
 
         powerMethod.unsetPower(playeruuid);
-        playersender.sendMessage(player, commands.getString("commands.power.status-off"));
+        playersender.sendMessage(player, commands.getString("commands.effects.status-off"));
         return true;
     }
 
     @Command(names = "list")
     public boolean onListSubCommand(@Sender Player player) {
-
-        playersender.sendMessage(player, commands.getString("commands.power.space"));
-        playersender.sendMessage(player, commands.getString("commands.power.potion-list"));
 
         Set<String> string = new HashSet<>();
 
@@ -94,8 +123,8 @@ public class PowerCommand implements CommandClass {
 
         String effectList = String.join(", ", string);
 
-        playersender.sendMessage(player, "&8- &f" + effectList.toLowerCase() + "&8.");
-        playersender.sendMessage(player, commands.getString("commands.power.space"));
+        playersender.sendMessage(player, commands.getString("commands.effects.potion-message")
+                .replace("%value%", effectList.toLowerCase()));
         return true;
     }
 }

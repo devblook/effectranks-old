@@ -6,6 +6,7 @@ import bryangaming.code.utils.*;
 import bryangaming.code.modules.*;
 import bryangaming.code.registry.*;
 import org.bukkit.*;
+import org.bukkit.event.EventHandler;
 import org.bukkit.plugin.*;
 
 public class Manager {
@@ -16,10 +17,11 @@ public class Manager {
     private DebugLogger debug;
 
     private CacheManager cacheManager;
-    private VariableManager variable;
+    private StringFormat variable;
     private MethodManager methodManager;
 
     private CommandsRegistry commandsRegistry;
+    private ListenersRegistry listenersRegistry;
 
     private ConfigManager configManager;
 
@@ -36,11 +38,12 @@ public class Manager {
         cacheManager = new CacheManager(this);
         configManager = new ConfigManager(this);
 
-        variable = new VariableManager(this);
+        variable = new StringFormat(this);
 
         methodManager = new MethodManager(this);
 
         commandsRegistry = new CommandsRegistry(this);
+        listenersRegistry = new ListenersRegistry(this);
     }
 
     public void setupPermisions() {
@@ -49,9 +52,15 @@ public class Manager {
             return;
         }
 
+
         RegisteredServiceProvider<Permission> rsp = plugin.getServer().getServicesManager().getRegistration(Permission.class);
 
         if (rsp == null) {
+            return;
+        }
+
+        if (!rsp.getProvider().hasGroupSupport()) {
+            plugin.getLogger().info("Warning! If you don't have a Vault implemention [LuckPerms/PermissionsEx], you can only use the default group.");
             return;
         }
 
@@ -79,7 +88,7 @@ public class Manager {
         return cacheManager;
     }
 
-    public VariableManager getVariables() {
+    public StringFormat getVariables() {
         return variable;
     }
 

@@ -27,13 +27,13 @@ public class EffectRanks extends JavaPlugin {
         int number =  (int)(Math.random() * 2.0 + 1.0);
 
         if (number == 1) {
-            this.getLogger().info("Goodbye!");
+            getLogger().info("Goodbye!");
         }
         else if (number == 2) {
-            this.getLogger().info("See you later!");
+            getLogger().info("See you later!");
         }
         else {
-            this.getLogger().info("You shouldn't watch this..");
+            getLogger().info("You shouldn't watch this..");
         }
     }
 }

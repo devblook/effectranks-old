@@ -4,7 +4,7 @@ import bryangaming.code.Manager;
 import bryangaming.code.EffectRanks;
 import bryangaming.code.modules.player.PlayerMessage;
 import bryangaming.code.utils.Configuration;
-import bryangaming.code.utils.VariableManager;
+import bryangaming.code.utils.StringFormat;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
 import me.fixeddev.commandflow.annotated.annotation.OptArg;
@@ -21,6 +21,7 @@ public class EffectRanksCommand implements CommandClass{
     private final EffectRanks plugin;
 
     private final Manager manager;
+    private final StringFormat stringFormat;
     private final PlayerMessage playersender;
 
     private final Configuration config;
@@ -31,6 +32,7 @@ public class EffectRanksCommand implements CommandClass{
         this.plugin = manager.getPlugin();
 
         this.manager = manager;
+        this.stringFormat = manager.getVariables();
         this.playersender = manager.getPlayerMethods().getSender();
 
         this.config = manager.getFiles().getConfig();
@@ -41,16 +43,15 @@ public class EffectRanksCommand implements CommandClass{
 
     @Command(names = "")
     public boolean onCommand(@Sender Player player) {
-        playersender.sendMessage(player, messages.getString("error.no-args"));
-        playersender.sendMessage(player, "&8- &fUsage: &a/effectranks [help/reload]");
+        playersender.sendMessage(player, messages.getString("error.unknown-args")
+                .replace("%usage%", stringFormat.getUsage("effectranks", "help, reload")));
         return true;
     }
 
     @Command(names = "help")
     public boolean helpSubCommand(@Sender Player player) {
 
-        VariableManager variable = this.manager.getVariables();
-
+        StringFormat variable = this.manager.getVariables();
         variable.loopString(player, commands, "commands.effectranks.help");
         return true;
     }
@@ -64,8 +65,8 @@ public class EffectRanksCommand implements CommandClass{
         }
 
         if (args.isEmpty()) {
-            playersender.sendMessage(player, messages.getString("error.no-args"));
-            playersender.sendMessage(player, "&8- &fUsage: &a/effectranks reload [file/all]");
+            playersender.sendMessage(player, messages.getString("error.unknown-args")
+                    .replace("%usage%", stringFormat.getUsage("effectranks", "help, reload", "all, <file>")));
             return true;
         }
 
@@ -81,32 +82,29 @@ public class EffectRanksCommand implements CommandClass{
     }
 
     public void getReloadEvent(Player player, String string) {
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-            @Override
-            public void run() {
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
 
-                Map<String, Configuration> fileMap = manager.getCache().getConfigFiles();
+            Map<String, Configuration> fileMap = manager.getCache().getConfigFiles();
 
-                if (string.equalsIgnoreCase("all")) {
-                    for (final Configuration config : fileMap.values()) {
-                        config.reload();
-                    }
-
-                    playersender.sendMessage(player, commands.getString("commands.effectranks.reload"));
-                    return;
+            if (string.equalsIgnoreCase("all")) {
+                for (final Configuration config : fileMap.values()) {
+                    config.reload();
                 }
 
-                if (fileMap.get(string) == null) {
-                    playersender.sendMessage(player, messages.getString("error.unknown-args"));
-                    playersender.sendMessage(player, "Files: &8[" + String.join(",", fileMap.keySet()) + "&8]");
-                    return;
-                }
-
-                fileMap.get(string).reload();
-                playersender.sendMessage(player, commands.getString("commands.effectranks.reload-file")
-                            .replace("%file%", StringUtils.capitalize(string)));
-
+                playersender.sendMessage(player, commands.getString("commands.effectranks.reload"));
+                return;
             }
+
+            if (fileMap.get(string) == null) {
+                playersender.sendMessage(player, messages.getString("error.unknown-args"));
+                playersender.sendMessage(player, "Files: &8[" + String.join(",", fileMap.keySet()) + "&8]");
+                return;
+            }
+
+            fileMap.get(string).reload();
+            playersender.sendMessage(player, commands.getString("commands.effectranks.reload-file")
+                        .replace("%file%", StringUtils.capitalize(string)));
+
         }, 60L);
     }
 }
