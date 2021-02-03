@@ -29,7 +29,7 @@ public class RankMethod {
     }
 
     public Set<String> getRanks() {
-        ConfigurationSection rankconfig = config.getConfigurationSection("groups.");
+        ConfigurationSection rankconfig = config.getConfigurationSection("groups");
         return rankconfig.getKeys(false);
     }
 
@@ -38,7 +38,6 @@ public class RankMethod {
         if (!Bukkit.getPluginManager().isPluginEnabled("Vault")){
             return "default";
         }
-
         if (manager.getPermission() == null){
             return "default";
         }
@@ -47,7 +46,7 @@ public class RankMethod {
             return "default";
         }
 
-        if (config.getString("config.status").equalsIgnoreCase("power")) {
+        if (config.getString("config.status").equalsIgnoreCase("permission")) {
             for (String getrank : getRanks()) {
                 if (player.hasPermission(getrank)){
                     return getrank;

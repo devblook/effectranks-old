@@ -42,6 +42,8 @@ public class CommandsRegistry
         commandManager = new BukkitCommandManager("EffectRanks");
         commandManager.getTranslator().setProvider(new CustomLanguage(manager));
 
+
+
         PartInjector injector = PartInjector.create();
 
         injector.install(new DefaultsModule());

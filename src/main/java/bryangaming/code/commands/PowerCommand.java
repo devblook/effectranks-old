@@ -3,6 +3,8 @@ package bryangaming.code.commands;
 import bryangaming.code.Manager;
 import bryangaming.code.EffectRanks;
 
+import bryangaming.code.api.EffectsModify;
+import bryangaming.code.api.events.EnableEffectsEvent;
 import bryangaming.code.modules.CooldownMethod;
 import bryangaming.code.modules.PowerMethod;
 import bryangaming.code.modules.RankMethod;
@@ -14,6 +16,7 @@ import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
 
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 
@@ -51,12 +54,19 @@ public class PowerCommand implements CommandClass {
         StringFormat stringFormat = manager.getVariables();
 
         playersender.sendMessage(player, messages.getString("error.unknown-args")
-            .replace("%usage%", stringFormat.getUsage("effects", "on, off, transfer, list")));
+            .replace("%usage%", stringFormat.getUsage("effects", "on, off, convert, list")));
         return true;
     }
 
     @Command(names = "on")
     public boolean onOnSubCommand(@Sender Player player) {
+
+        EnableEffectsEvent enableEffectsEvent = new EnableEffectsEvent(player);
+        Bukkit.getPluginManager().callEvent(enableEffectsEvent);
+
+        if (enableEffectsEvent.isCancelled()){
+            return false;
+        }
 
         RankMethod rankMethod = manager.getPlayerMethods().getLoopMethod();
         CooldownMethod cooldownMethod = manager.getPlayerMethods().getCooldownMethod();
@@ -71,11 +81,23 @@ public class PowerCommand implements CommandClass {
             playersender.sendMessage(player, messages.getString("error.effects.empty-effects"));
             return true;
         }
+        EffectsModify.giveEffectRank(player);
+
+        powerMethod.setPower(player.getUniqueId());
+        playersender.sendMessage(player, commands.getString("commands.effects.status-on"));
+        cooldownMethod.putCooldown(player, (System.currentTimeMillis() / 1000) + cooldownMethod.getRankCooldown(player));
         return true;
     }
 
     @Command(names = "convert")
     public boolean onConvertSubCommand(@Sender Player player) {
+
+        EnableEffectsEvent enableEffectsEvent = new EnableEffectsEvent(player);
+        Bukkit.getPluginManager().callEvent(enableEffectsEvent);
+
+        if (enableEffectsEvent.isCancelled()){
+            return false;
+        }
 
         RankMethod rankMethod = manager.getPlayerMethods().getLoopMethod();
         CooldownMethod cooldownMethod = manager.getPlayerMethods().getCooldownMethod();

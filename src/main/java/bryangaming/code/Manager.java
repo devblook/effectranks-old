@@ -1,12 +1,12 @@
 package bryangaming.code;
 
+import bryangaming.code.api.EffectsModifyImpl;
 import bryangaming.code.debug.DebugLogger;
 import net.milkbowl.vault.permission.*;
 import bryangaming.code.utils.*;
 import bryangaming.code.modules.*;
 import bryangaming.code.registry.*;
 import org.bukkit.*;
-import org.bukkit.event.EventHandler;
 import org.bukkit.plugin.*;
 
 public class Manager {
@@ -22,6 +22,8 @@ public class Manager {
 
     private CommandsRegistry commandsRegistry;
     private ListenersRegistry listenersRegistry;
+
+    private EffectsModifyImpl effectsModifyImpl;
 
     private ConfigManager configManager;
 
@@ -44,6 +46,8 @@ public class Manager {
 
         commandsRegistry = new CommandsRegistry(this);
         listenersRegistry = new ListenersRegistry(this);
+
+        effectsModifyImpl = new EffectsModifyImpl(this);
     }
 
     public void setupPermisions() {

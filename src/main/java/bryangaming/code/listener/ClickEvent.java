@@ -1,11 +1,13 @@
 package bryangaming.code.listener;
 
 import bryangaming.code.Manager;
+import bryangaming.code.api.events.EnableEffectsEvent;
 import bryangaming.code.modules.CooldownMethod;
 import bryangaming.code.modules.PowerMethod;
 import bryangaming.code.modules.RankMethod;
 import bryangaming.code.modules.player.PlayerMessage;
 import bryangaming.code.utils.Configuration;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -81,6 +83,13 @@ public class ClickEvent implements Listener{
     }
 
     public void setPower(Player player){
+
+        EnableEffectsEvent enableEffectsEvent = new EnableEffectsEvent(player);
+        Bukkit.getPluginManager().callEvent(enableEffectsEvent);
+
+        if (enableEffectsEvent.isCancelled()){
+            return;
+        }
 
         CooldownMethod cooldownMethod = manager.getPlayerMethods().getCooldownMethod();
 
