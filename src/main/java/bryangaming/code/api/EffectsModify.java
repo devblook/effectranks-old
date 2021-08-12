@@ -12,7 +12,7 @@ public interface EffectsModify {
      *
      */
 
-    static void giveEffectRank(Player player){
+    default void giveEffectRank(Player player){
 
     }
 }

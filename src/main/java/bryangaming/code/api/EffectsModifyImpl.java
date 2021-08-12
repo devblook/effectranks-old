@@ -24,7 +24,7 @@ public class EffectsModifyImpl implements EffectsModify {
     }
 
 
-    public static void giveEffectRank(Player player){
+    public void giveEffectRank(Player player){
 
         RankMethod rankMethod = methodManager.getLoopMethod();
         CooldownMethod cooldownMethod = methodManager.getCooldownMethod();

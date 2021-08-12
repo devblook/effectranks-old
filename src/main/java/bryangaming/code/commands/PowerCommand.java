@@ -81,7 +81,6 @@ public class PowerCommand implements CommandClass {
             playersender.sendMessage(player, messages.getString("error.effects.empty-effects"));
             return true;
         }
-        EffectsModify.giveEffectRank(player);
 
         powerMethod.setPower(player.getUniqueId());
         playersender.sendMessage(player, commands.getString("commands.effects.status-on"));

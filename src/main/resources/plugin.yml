@@ -1,7 +1,9 @@
-name: EffectRanks
-version: 1.0
-authors: [BryanGaming]
 main: bryangaming.code.EffectRanks
-api-version: 1.16
+name: EffectRanks
+version: 1.2
+authors: [BryanGaming]
+softdepend:
+  - Vault
+api-version: 1.13
 
-commands:
+

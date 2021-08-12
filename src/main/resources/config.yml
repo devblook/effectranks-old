@@ -1,6 +1,6 @@
 #
 # EffectRanks by BryanGaming
-# Version: 1.0
+# Version: 1.2
 #
 
 config:
@@ -11,22 +11,38 @@ config:
   error: "&c[Error] &8|"
   e-variable: "%e"
 
+  # Key interact: [NONE /SHIFT/ LEFT-CLICK/ RIGHT-CLICK]
+  key: SHIFT
   # Status: power [For permission], group [For groups];
   status: group
   perms:
     reload: effectranks.reload
 
-
+default:
+  cooldown: 30s
+  # Displayname [Optional]
+  displayname: default
+  effects:
+  - "speed,50,4"
 
 groups:
-  default:
-    cooldown: 2m
-    conditions:
-      - "SPEED,50,4"
   A:
-    cooldown: 2m
-    conditions:
-      - "SPEED,540,4"
+    cooldown: 30s
+    displayname: A
+    effects:
+      - "speed,540,4"
+
+potion:
+  # The effect value (%effect-value%) is the loop-value of the effects, if the rank have 2 o more efects:
+  # The line with the variable, will multiply depends on the amount of effects placed.
+  name: "&fA &a%rank_name% &fpotion."
+  format:
+    - ""
+    - "&aEffects:"
+    - "&8- &f%effect-value%"
+    - ""
+    - "&eClick to use!"
+  effect-value: "%name% &8- &f%duration% &8- &f%level%"
 
 time:
   years: years
