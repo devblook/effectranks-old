@@ -1,7 +1,7 @@
 package me.bryang.effectranks.modules;
 
-import me.bryang.effectranks.PluginService;
 import me.bryang.effectranks.EffectRanks;
+import me.bryang.effectranks.PluginService;
 import me.bryang.effectranks.utils.FileManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

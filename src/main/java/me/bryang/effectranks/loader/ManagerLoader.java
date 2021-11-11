@@ -4,8 +4,8 @@ import me.bryang.effectranks.PluginService;
 import me.bryang.effectranks.modules.CooldownManager;
 import me.bryang.effectranks.modules.PowerManager;
 import me.bryang.effectranks.modules.RankManager;
-import me.bryang.effectranks.modules.convert.ConvertPotionManager;
 import me.bryang.effectranks.modules.SenderManager;
+import me.bryang.effectranks.modules.convert.ConvertPotionManager;
 
 public class ManagerLoader {
 

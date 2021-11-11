@@ -1,9 +1,12 @@
 package me.bryang.effectranks.debug;
 
-import me.bryang.effectranks.PluginService;
 import me.bryang.effectranks.EffectRanks;
+import me.bryang.effectranks.PluginService;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

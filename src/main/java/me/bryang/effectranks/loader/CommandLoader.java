@@ -1,16 +1,17 @@
 package me.bryang.effectranks.loader;
 
 import me.bryang.effectranks.PluginService;
-
 import me.bryang.effectranks.commands.EffectRanksCommand;
 import me.bryang.effectranks.commands.PowerCommand;
 import me.bryang.effectranks.commands.modules.CustomLanguage;
-import me.fixeddev.commandflow.*;
-import me.fixeddev.commandflow.bukkit.*;
-import me.fixeddev.commandflow.annotated.part.defaults.*;
-import me.fixeddev.commandflow.annotated.part.*;
-import me.fixeddev.commandflow.bukkit.factory.*;
-import me.fixeddev.commandflow.annotated.*;
+import me.fixeddev.commandflow.CommandManager;
+import me.fixeddev.commandflow.annotated.AnnotatedCommandTreeBuilder;
+import me.fixeddev.commandflow.annotated.AnnotatedCommandTreeBuilderImpl;
+import me.fixeddev.commandflow.annotated.CommandClass;
+import me.fixeddev.commandflow.annotated.part.PartInjector;
+import me.fixeddev.commandflow.annotated.part.defaults.DefaultsModule;
+import me.fixeddev.commandflow.bukkit.BukkitCommandManager;
+import me.fixeddev.commandflow.bukkit.factory.BukkitModule;
 
 public class CommandLoader
 {

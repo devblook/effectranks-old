@@ -1,7 +1,7 @@
 package me.bryang.effectranks.modules;
 
-import me.bryang.effectranks.PluginService;
 import me.bryang.effectranks.EffectRanks;
+import me.bryang.effectranks.PluginService;
 import me.bryang.effectranks.utils.FileManager;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;

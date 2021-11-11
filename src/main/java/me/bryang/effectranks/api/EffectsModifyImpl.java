@@ -1,12 +1,12 @@
 package me.bryang.effectranks.api;
 
 import me.bryang.effectranks.PluginService;
-import me.bryang.effectranks.modules.CooldownManager;
+import me.bryang.effectranks.loader.FileLoader;
 import me.bryang.effectranks.loader.ManagerLoader;
+import me.bryang.effectranks.modules.CooldownManager;
 import me.bryang.effectranks.modules.PowerManager;
 import me.bryang.effectranks.modules.RankManager;
 import me.bryang.effectranks.modules.SenderManager;
-import me.bryang.effectranks.loader.FileLoader;
 import me.bryang.effectranks.utils.FileManager;
 import org.bukkit.entity.Player;
 

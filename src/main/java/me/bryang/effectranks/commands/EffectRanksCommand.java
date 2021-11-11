@@ -1,7 +1,7 @@
 package me.bryang.effectranks.commands;
 
-import me.bryang.effectranks.PluginService;
 import me.bryang.effectranks.EffectRanks;
+import me.bryang.effectranks.PluginService;
 import me.bryang.effectranks.modules.SenderManager;
 import me.bryang.effectranks.utils.FileManager;
 import me.bryang.effectranks.utils.TextUtils;

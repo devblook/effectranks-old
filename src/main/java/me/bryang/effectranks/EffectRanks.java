@@ -1,6 +1,6 @@
 package me.bryang.effectranks;
 
-import org.bukkit.plugin.java.*;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class EffectRanks extends JavaPlugin {
 

@@ -3,7 +3,6 @@ package me.bryang.effectranks.modules;
 import me.bryang.effectranks.PluginService;
 import me.bryang.effectranks.utils.TextUtils;
 import org.bukkit.entity.Player;
-import org.w3c.dom.Text;
 
 public class SenderManager
 {

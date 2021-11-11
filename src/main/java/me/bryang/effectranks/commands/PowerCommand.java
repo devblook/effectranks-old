@@ -1,18 +1,16 @@
 package me.bryang.effectranks.commands;
 
 import me.bryang.effectranks.PluginService;
-
 import me.bryang.effectranks.api.events.EnableEffectsEvent;
 import me.bryang.effectranks.modules.CooldownManager;
 import me.bryang.effectranks.modules.PowerManager;
 import me.bryang.effectranks.modules.RankManager;
-import me.bryang.effectranks.modules.convert.ConvertPotionManager;
 import me.bryang.effectranks.modules.SenderManager;
+import me.bryang.effectranks.modules.convert.ConvertPotionManager;
 import me.bryang.effectranks.utils.FileManager;
 import me.bryang.effectranks.utils.TextUtils;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
-
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

@@ -2,14 +2,14 @@ package me.bryang.effectranks;
 
 import me.bryang.effectranks.api.EffectsModifyImpl;
 import me.bryang.effectranks.debug.DebugLogger;
-import me.bryang.effectranks.loader.ManagerLoader;
 import me.bryang.effectranks.loader.CommandLoader;
 import me.bryang.effectranks.loader.FileLoader;
 import me.bryang.effectranks.loader.ListenerLoader;
+import me.bryang.effectranks.loader.ManagerLoader;
 import me.bryang.effectranks.utils.TextUtils;
-import net.milkbowl.vault.permission.*;
-import org.bukkit.*;
-import org.bukkit.plugin.*;
+import net.milkbowl.vault.permission.Permission;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.RegisteredServiceProvider;
 
 public class PluginService {
     private final EffectRanks plugin;
