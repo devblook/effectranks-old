@@ -111,7 +111,7 @@ public class ClickEvent implements Listener{
 
         powerManager.setPower(player.getUniqueId());
         cooldownManager.putCooldown(player, (System.currentTimeMillis() / 1000) + cooldownManager.getRankCooldown(player));
-        senderManager.sendMessage(player, messagesFile.getString("messages.effects.status-on"));
+        senderManager.sendMessage(player, messagesFile.getString("commands.effects.status-on"));
 
     }
 }

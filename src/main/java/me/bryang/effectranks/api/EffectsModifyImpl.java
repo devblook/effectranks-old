@@ -47,7 +47,7 @@ public class EffectsModifyImpl implements EffectsModify {
         }
 
         powerManager.setPower(player.getUniqueId());
-        senderManager.sendMessage(player, messagesFile.getString("messages.effects.status-on"));
+        senderManager.sendMessage(player, messagesFile.getString("commands.effects.status-on"));
         cooldownManager.putCooldown(player, (System.currentTimeMillis() / 1000) + cooldownManager.getRankCooldown(player));
 
     }

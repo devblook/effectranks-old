@@ -74,7 +74,7 @@ public class PowerCommand implements CommandClass {
         }
 
         powerManager.setPower(player.getUniqueId());
-        senderManager.sendMessage(player, messagesFile.getString("messages.effects.status-on"));
+        senderManager.sendMessage(player, messagesFile.getString("commands.effects.status-on"));
         cooldownManager.putCooldown(player, (System.currentTimeMillis() / 1000) + cooldownManager.getRankCooldown(player));
         return true;
     }
@@ -106,7 +106,7 @@ public class PowerCommand implements CommandClass {
 
         player.getInventory().addItem(convertPotionManager.convertPotion(rankManager.getPlayerRank(player)));
         cooldownManager.putCooldown(player, (System.currentTimeMillis() / 1000) + cooldownManager.getRankCooldown(player));
-        senderManager.sendMessage(player, messagesFile.getString("messages.effects.converted"));
+        senderManager.sendMessage(player, messagesFile.getString("commands.effects.converted"));
         return true;
     }
 
@@ -116,7 +116,7 @@ public class PowerCommand implements CommandClass {
         UUID playeruuid = player.getUniqueId();
 
         powerManager.unsetPower(playeruuid);
-        senderManager.sendMessage(player, messagesFile.getString("messages.effects.status-off"));
+        senderManager.sendMessage(player, messagesFile.getString("commands.effects.status-off"));
         return true;
     }
 
@@ -135,7 +135,7 @@ public class PowerCommand implements CommandClass {
 
         String effectList = String.join(", ", string);
 
-        senderManager.sendMessage(player, messagesFile.getString("messages.effects.potion-message")
+        senderManager.sendMessage(player, messagesFile.getString("commands.effects.potion-message")
                 .replace("%value%", effectList.toLowerCase()));
         return true;
     }

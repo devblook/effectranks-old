@@ -47,7 +47,7 @@ public class EffectRanksCommand implements CommandClass{
     @Command(names = "help")
     public boolean helpSubCommand(@Sender Player player) {
 
-        messagesFile.getStringList("messages.effectranks.help")
+        messagesFile.getStringList("commands.effectranks.help")
                 .forEach(message -> senderManager.sendMessage(player, message));
         return true;
     }
@@ -67,12 +67,12 @@ public class EffectRanksCommand implements CommandClass{
         }
 
         if (args.equalsIgnoreCase("all")) {
-            senderManager.sendMessage(player, messagesFile.getString("messages.effectranks.load"));
+            senderManager.sendMessage(player, messagesFile.getString("commands.effectranks.load"));
             getReloadEvent(player, "all");
             return true;
         }
 
-        senderManager.sendMessage(player, messagesFile.getString("messages.effectranks.load-file"));
+        senderManager.sendMessage(player, messagesFile.getString("commands.effectranks.load-file"));
         getReloadEvent(player, args);
         return true;
     }
@@ -87,7 +87,7 @@ public class EffectRanksCommand implements CommandClass{
                     configFile.reload();
                 }
 
-                senderManager.sendMessage(player, messagesFile.getString("messages.effectranks.reload"));
+                senderManager.sendMessage(player, messagesFile.getString("commands.effectranks.reload"));
                 return;
             }
 
@@ -98,7 +98,7 @@ public class EffectRanksCommand implements CommandClass{
             }
 
             fileMap.get(string).reload();
-            senderManager.sendMessage(player, messagesFile.getString("messages.effectranks.reload-file")
+            senderManager.sendMessage(player, messagesFile.getString("commands.effectranks.reload-file")
                         .replace("%file%", StringUtils.capitalize(string)));
 
         }, 60L);
