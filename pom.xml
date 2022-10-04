@@ -63,7 +63,7 @@
         </repository>
         <repository>
             <id>unnamed-snapshots</id>
-            <url>https://repo.unnamed.team/repository/unnamed-snapshots/</url>
+            <url>https://repo.unnamed.team/repository/unnamed-public/</url>
         </repository>
         <repository>
             <id>sonatype</id>
