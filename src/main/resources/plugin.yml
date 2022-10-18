@@ -1,6 +1,6 @@
 main: me.bryang.effectranks.EffectRanks
 name: EffectRanks
-version: 1.4.4
+version: 1.4.5
 authors: [BryanGaming]
 softdepend:
   - Vault
