@@ -75,7 +75,7 @@
     <dependency>
            <groupId>org.spigotmc</groupId>
            <artifactId>spigot-api</artifactId>
-           <version>1.17-R0.1-SNAPSHOT</version>
+           <version>1.19.2-R0.1-SNAPSHOT</version>
            <scope>provided</scope>
     </dependency>
         <dependency>
@@ -83,6 +83,11 @@
             <artifactId>VaultAPI</artifactId>
             <version>1.7</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>me.fixeddev</groupId>
+            <artifactId>commandflow-universal</artifactId>
+            <version>0.5.4</version>
         </dependency>
         <dependency>
             <groupId>me.fixeddev</groupId>
