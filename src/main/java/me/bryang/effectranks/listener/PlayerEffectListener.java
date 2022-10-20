@@ -15,11 +15,11 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 
-public class ClickEvent implements Listener{
+public class PlayerEffectListener implements Listener {
 
     private final PluginService pluginService;
 
-    public ClickEvent(PluginService pluginService){
+    public PlayerEffectListener(PluginService pluginService){
         this.pluginService = pluginService;
     }
 
