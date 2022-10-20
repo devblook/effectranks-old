@@ -54,7 +54,6 @@ public class EffectRanksCommand implements CommandClass{
 
     @Command(names = "reload")
     public boolean reloadSubCommand(@Sender Player player, @OptArg("") String args) {
-
         if (!player.hasPermission(configFile.getString("config.perms.reload"))) {
             senderManager.sendMessage(player, messagesFile.getString("error.no-perms"));
             return true;
@@ -68,40 +67,34 @@ public class EffectRanksCommand implements CommandClass{
 
         if (args.equalsIgnoreCase("all")) {
             senderManager.sendMessage(player, messagesFile.getString("commands.effectranks.load"));
-            getReloadEvent(player, "all");
+            reloadFiles(player, "all");
             return true;
         }
 
         senderManager.sendMessage(player, messagesFile.getString("commands.effectranks.load-file"));
-        getReloadEvent(player, args);
+        reloadFiles(player, args);
         return true;
     }
 
-    public void getReloadEvent(Player player, String string) {
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-
-            Map<String, FileManager> fileMap = pluginService.getCache().getConfigFiles();
-
-            if (string.equalsIgnoreCase("all")) {
-                for (final FileManager configFile : fileMap.values()) {
-                    configFile.reload();
-                }
-
-                senderManager.sendMessage(player, messagesFile.getString("commands.effectranks.reload"));
-                return;
+    public void reloadFiles(Player player, String string) {
+        Map<String, FileManager> fileMap = pluginService.getCache().getConfigFiles();
+        if (string.equalsIgnoreCase("all")) {
+            for (final FileManager configFile : fileMap.values()) {
+                configFile.reload();
             }
+            senderManager.sendMessage(player, messagesFile.getString("commands.effectranks.reload"));
+            return;
+        }
 
-            if (fileMap.get(string) == null) {
-                senderManager.sendMessage(player, messagesFile.getString("error.unknown-args"));
-                senderManager.sendMessage(player, "Files: &8[" + String.join(",", fileMap.keySet()) + "&8]");
-                return;
-            }
+        if (fileMap.get(string) == null) {
+            senderManager.sendMessage(player, messagesFile.getString("error.unknown-args"));
+            senderManager.sendMessage(player, "Files: &8[" + String.join(",", fileMap.keySet()) + "&8]");
+            return;
+        }
 
-            fileMap.get(string).reload();
-            senderManager.sendMessage(player, messagesFile.getString("commands.effectranks.reload-file")
-                        .replace("%file%", StringUtils.capitalize(string)));
-
-        }, 60L);
+        fileMap.get(string).reload();
+        senderManager.sendMessage(player, messagesFile.getString("commands.effectranks.reload-file")
+                .replace("%file%", StringUtils.capitalize(string)));
     }
 }
 
