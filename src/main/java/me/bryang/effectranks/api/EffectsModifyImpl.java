@@ -1,7 +1,7 @@
 package me.bryang.effectranks.api;
 
 import me.bryang.effectranks.PluginService;
-import me.bryang.effectranks.loader.FileLoader;
+import me.bryang.effectranks.loader.FileService;
 import me.bryang.effectranks.loader.ManagerLoader;
 import me.bryang.effectranks.modules.CooldownManager;
 import me.bryang.effectranks.modules.PowerManager;
@@ -15,7 +15,7 @@ public class EffectsModifyImpl implements EffectsModify {
     private PluginService pluginService;
 
     private final ManagerLoader managerLoader;
-    private FileLoader fileManager;
+    private FileService fileManager;
 
     public EffectsModifyImpl(PluginService pluginService){
         this.pluginService = pluginService;
