@@ -1,7 +1,7 @@
 package me.bryang.effectranks.loader;
 
 import me.bryang.effectranks.PluginService;
-import me.bryang.effectranks.listener.ClickEvent;
+import me.bryang.effectranks.listener.PlayerEffectListener;
 import org.bukkit.plugin.PluginManager;
 
 public class ListenerLoader {
@@ -17,7 +17,7 @@ public class ListenerLoader {
 
     public void setup(){
         PluginManager pluginManager = pluginService.getPlugin().getServer().getPluginManager();
-        pluginManager.registerEvents(new ClickEvent(pluginService), pluginService.getPlugin());
+        pluginManager.registerEvents(new PlayerEffectListener(pluginService), pluginService.getPlugin());
     }
 
 }

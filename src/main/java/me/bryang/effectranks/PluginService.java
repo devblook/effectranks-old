@@ -3,7 +3,7 @@ package me.bryang.effectranks;
 import me.bryang.effectranks.api.EffectsModifyImpl;
 import me.bryang.effectranks.debug.DebugLogger;
 import me.bryang.effectranks.loader.CommandLoader;
-import me.bryang.effectranks.loader.FileLoader;
+import me.bryang.effectranks.loader.FileService;
 import me.bryang.effectranks.loader.ListenerLoader;
 import me.bryang.effectranks.loader.ManagerLoader;
 import me.bryang.effectranks.utils.TextUtils;
@@ -26,7 +26,7 @@ public class PluginService {
 
     private EffectsModifyImpl effectsModifyImpl;
 
-    private FileLoader fileLoader;
+    private FileService fileService;
 
     public PluginService(final EffectRanks plugin) {
         this.plugin = plugin;
@@ -40,7 +40,7 @@ public class PluginService {
         setupPermisions();
 
         cacheManager = new CacheManager(this);
-        fileLoader = new FileLoader(this);
+        fileService = new FileService(this);
 
         managerLoader = new ManagerLoader(this);
 
@@ -55,7 +55,6 @@ public class PluginService {
             plugin.getLogger().info("Warning! If you didn't installed Vault, you can only use the default group.");
             return;
         }
-
 
         RegisteredServiceProvider<Permission> rsp = plugin.getServer().getServicesManager().getRegistration(Permission.class);
 
@@ -84,8 +83,8 @@ public class PluginService {
         return debug;
     }
 
-    public FileLoader getFiles() {
-        return fileLoader;
+    public FileService getFiles() {
+        return fileService;
     }
 
     public CacheManager getCache() {

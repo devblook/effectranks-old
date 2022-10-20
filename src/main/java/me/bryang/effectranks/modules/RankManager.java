@@ -35,20 +35,20 @@ public class RankManager {
 
     public String getPlayerRank(Player player) {
 
-        if (!Bukkit.getPluginManager().isPluginEnabled("Vault")){
+        if (!Bukkit.getPluginManager().isPluginEnabled("Vault")) {
             return "default";
         }
-        if (pluginService.getPermission() == null){
+        if (pluginService.getPermission() == null) {
             return "default";
         }
 
-        if (!pluginService.getPermission().hasGroupSupport()){
+        if (!pluginService.getPermission().hasGroupSupport()) {
             return "default";
         }
 
         if (configFile.getString("config.status").equalsIgnoreCase("permission")) {
             for (String getrank : getRanks()) {
-                if (player.hasPermission(getrank)){
+                if (player.hasPermission(getrank)) {
                     return getrank;
                 }
             }
@@ -65,7 +65,7 @@ public class RankManager {
 
 
     public List<String> getRankConditions(Player player) {
-        if (getPlayerRank(player).equalsIgnoreCase("default")){
+        if (getPlayerRank(player).equalsIgnoreCase("default")) {
             return configFile.getStringList("default.effects");
         }
 

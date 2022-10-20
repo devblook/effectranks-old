@@ -10,14 +10,14 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DebugLogger{
+public class DebugLogger {
 
     private final PluginService pluginService;
     private final EffectRanks plugin;
 
     private File file;
 
-    public DebugLogger(PluginService pluginService){
+    public DebugLogger(PluginService pluginService) {
         this.pluginService = pluginService;
         this.plugin = pluginService.getPlugin();
         setup();
@@ -43,18 +43,22 @@ public class DebugLogger{
         }
     }
 
-    public void setup(){
-        file = new File(plugin.getDataFolder() ,"logs.yml");
-        file.mkdirs();
+    public void setup() {
+        file = new File(plugin.getDataFolder(), "logs.log");
 
-        if (file.exists()){
-            file.delete();
+        if (file.exists() && file.mkdirs()) {
+            plugin.getLogger().info("Old log file removed!");
+            if (!file.delete()) {
+                throw new RuntimeException("Failed to delete old log file!");
+            }
         }
-        try{
-            file.createNewFile();
-            plugin.getLogger().info( "Logs created!");
 
-        }catch(IOException ioException){
+        try {
+            if (!file.createNewFile()) {
+                throw new RuntimeException("Failed to create log file!");
+            }
+            plugin.getLogger().info("Logs created!");
+        } catch (IOException ioException) {
             ioException.printStackTrace();
         }
     }
@@ -64,21 +68,20 @@ public class DebugLogger{
     }
 
 
-    private void getLogger(String string, String mode){
-        Date now = new Date();
-        try{
-            FileWriter fw = new FileWriter(plugin.getDataFolder() + "/logs.yml", true);
-            BufferedWriter writer = new BufferedWriter(fw);
+    private void getLogger(String string, String mode) {
+        Date actualDate = new Date();
+        try {
+            FileWriter logWriter = new FileWriter(file, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(logWriter);
             SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
 
-            writer.write("[" + format.format(now) + " " + mode + "] " + string);
-            writer.newLine();
-            writer.flush();
-            writer.close();
+            bufferedWriter.write("[" + format.format(actualDate) + " " + mode + "]: " + string);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+            bufferedWriter.close();
 
-        }catch (IOException io){
+        } catch (IOException io) {
             io.printStackTrace();
-
         }
 
     }

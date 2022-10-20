@@ -5,7 +5,7 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class EnableEffectsEvent extends Event implements Cancellable{
+public class EnableEffectsEvent extends Event implements Cancellable {
 
     private final Player player;
     private boolean isCancelled;
