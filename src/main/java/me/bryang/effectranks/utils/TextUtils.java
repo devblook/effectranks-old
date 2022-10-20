@@ -1,6 +1,5 @@
 package me.bryang.effectranks.utils;
 
-
 import me.bryang.effectranks.PluginService;
 import org.bukkit.ChatColor;
 

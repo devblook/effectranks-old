@@ -13,8 +13,7 @@ import me.fixeddev.commandflow.annotated.part.defaults.DefaultsModule;
 import me.fixeddev.commandflow.bukkit.BukkitCommandManager;
 import me.fixeddev.commandflow.bukkit.factory.BukkitModule;
 
-public class CommandLoader
-{
+public class CommandLoader {
     private final PluginService pluginService;
 
     private AnnotatedCommandTreeBuilder builder;
